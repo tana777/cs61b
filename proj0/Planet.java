@@ -7,7 +7,7 @@ public class Planet {
   public double mass;
   public String imgFileName;
 
-  static final double G = 6.67 * 10e-12;
+  private static final double G = 6.67 * 10e-12;
 
   /** add 2 Planet constructors that can initialize an instance of the Planet class. */
   public Planet(double xP, double yP, double xV,
