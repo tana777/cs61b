@@ -34,13 +34,15 @@ public class Planet {
     double dx = q.xxPos - xxPos;
     double dy = q.yyPos - yyPos;
     double r2 = dx * dx + dy * dy;
+    /**
     double value;
     double sr = r2 / 2;
+
     do {
       value = sr;
       sr = (value + r2 / value) / 2;
-    } while ((value-sr) != 0);
-    return sr;
+    } while ((value-sr) != 0); */
+    return Math.pow(r2,0.5);
   }
 
   /** Calculate the force exerted on the taken in planet by the given planet. */
