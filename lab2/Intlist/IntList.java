@@ -81,8 +81,20 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        //TODO:  fill in method]
+        if (A == null) {
+            return null;
+        }
+        if (B == null) {
+            return A;
+        }
+        IntList tmp = A;
+        while (A.rest != null) {
+            A = A.rest;
+        }
+        A.rest = B;
+        return tmp;
+
     }
 
     /**
@@ -91,7 +103,21 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList res = new IntList(7, null);
+        IntList ptr = res;
+        while (A != null) {
+            ptr.rest = new IntList(A.first, null);
+            A = A.rest;
+            ptr = ptr.rest;
+        }
+        while (B != null) {
+            ptr.rest = new IntList(B.first,null);
+            B = B.rest;
+            ptr = ptr.rest;
+
+        }
+        return res.rest;
+
     }
 
 
