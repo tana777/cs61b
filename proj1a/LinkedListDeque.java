@@ -1,10 +1,11 @@
-public class LinkedListDeque<General> {
-    private class IntNode {
-        public General item;
-        public IntNode prev;
-        public IntNode next;
+public class LinkedListDeque<T> {
 
-        public IntNode(General i, IntNode p, IntNode n) {
+    private class IntNode {
+        private T item;
+        private IntNode prev;
+        private IntNode next;
+
+        public IntNode(T i, IntNode p, IntNode n) {
             item = i;
             prev = p;
             next = n;
@@ -20,7 +21,7 @@ public class LinkedListDeque<General> {
         size = 0;
     }
 
-    public LinkedListDeque(General x) {
+    public LinkedListDeque(T x) {
         sentinel = new IntNode(null, null, null);
         sentinel.next = new IntNode(x,sentinel,sentinel);
         sentinel.prev = sentinel.next;
@@ -28,9 +29,9 @@ public class LinkedListDeque<General> {
     }
 
     /** Adds item to the front of the list. */
-    public void addFirst(General item) {
+    public void addFirst(T item) {
         if (size == 0) {
-            sentinel.next = new IntNode(item, sentinel,sentinel);
+            sentinel.next = new IntNode(item, sentinel, sentinel);
             sentinel.prev = sentinel.next;
         } else {
             sentinel.next = new IntNode(item, sentinel, sentinel.next);
@@ -40,12 +41,11 @@ public class LinkedListDeque<General> {
     }
 
     /** Add item to the last of the list. */
-    public void addLast(General item) {
+    public void addLast(T item) {
         if (size == 0) {
-            sentinel.prev = new IntNode(item, sentinel,sentinel);
+            sentinel.prev = new IntNode(item, sentinel, sentinel);
             sentinel.next = sentinel.prev;
-        }
-        else {
+        } else {
             sentinel.prev = new IntNode(item, sentinel.prev, sentinel);
             sentinel.prev.prev.next = sentinel.prev;
         }
@@ -76,11 +76,11 @@ public class LinkedListDeque<General> {
     }
 
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null. */
-    public General removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
-        General val = sentinel.next.item;
+        T val = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
         size = size - 1;
@@ -88,11 +88,11 @@ public class LinkedListDeque<General> {
     }
 
     /** Removes and returns the item at the back of the deque. If no such item exists, return null. */
-    public General removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
-        General val = sentinel.prev.item;
+        T val = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
         size = size - 1;
@@ -100,7 +100,7 @@ public class LinkedListDeque<General> {
     }
 
     /** Gets the item at the given index, if no such item exits, returns null. Must not alter the deque. */
-    public General get(int index) {
+    public T get(int index) {
         if (index >= size) {
             return null;
         }
@@ -113,28 +113,26 @@ public class LinkedListDeque<General> {
         }
         return null;
     }
-/**
-    public static void main(String[] args) {
-        LinkedListDeque y = new LinkedListDeque(9);
-        boolean yy = y.isEmpty();
-        int sizeY = y.size();
-        y.printDeque();
-        General removeFy;
-        removeFy = (General) y.removeFirst();
-        General removeLy = (General) y.removeLast();
-        General get_value_y = (General) y.get(1);
 
-        LinkedListDeque x = new LinkedListDeque(34);
-        x.addFirst(2);
-        x.addLast(100);
-        boolean xx = x.isEmpty();
-        int sizeX = x.size();
-        x.printDeque();
-        General removeFx = (General) x.removeFirst();
-        General removeLx = (General) x.removeLast();
-        int sizeX_after = x.size();
-        General get_value_x = (General) x.get(0);
-
-    }
- */
+//    public static void main(String[] args) {
+//        LinkedListDeque<Integer> y = new LinkedListDeque<>(9);
+//        boolean yy = y.isEmpty();
+//        int sizeY = y.size();
+//        y.printDeque();
+//        int removeFy =  y.removeFirst();
+//        Integer removeLy =  y.removeLast();
+//        Integer get_value_y = y.get(1);
+//
+//        LinkedListDeque<String> x = new LinkedListDeque("new");
+//        x.addFirst("A");
+//        x.addLast("B");
+//        boolean xx = x.isEmpty();
+//        int sizeX = x.size();
+//        x.printDeque();
+//        String removeFx =  x.removeFirst();
+//        String removeLx = x.removeLast();
+//        int sizeX_after = x.size();
+//        String get_value_x = x.get(0);
+//
+//    }
 }
