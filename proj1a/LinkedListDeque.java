@@ -114,6 +114,27 @@ public class LinkedListDeque<T> {
         return null;
     }
 
+
+    private IntNode helper(IntNode p, int i) {
+        if (i == 0) {
+            return p.next;
+        }
+        return helper(p.next, i-1);
+    }
+
+
+    public T getRecursive(int index) {
+        if (index >= size) {
+            return null;
+        }
+        IntNode v = helper(sentinel, index);
+        if (v == null) {
+            return null;
+        }
+        return v.item;
+    }
+
+
 //    public static void main(String[] args) {
 //        LinkedListDeque<Integer> y = new LinkedListDeque<>(9);
 //        boolean yy = y.isEmpty();
@@ -129,9 +150,8 @@ public class LinkedListDeque<T> {
 //        boolean xx = x.isEmpty();
 //        int sizeX = x.size();
 //        x.printDeque();
-//        String removeFx =  x.removeFirst();
-//        String removeLx = x.removeLast();
 //        int sizeX_after = x.size();
+//        String get_value_re = x.getRecursive(1);
 //        String get_value_x = x.get(0);
 //
 //    }
