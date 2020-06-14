@@ -4,13 +4,6 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
 
-    public ArrayDeque(int s) {
-        items = (T []) new Object[s];
-        size = 0;
-        nextFirst = 0;
-        nextLast = 1;
-    }
-
     public ArrayDeque() {
         items = (T []) new Object[8];
         size = 0;
@@ -21,7 +14,7 @@ public class ArrayDeque<T> {
     The position of the next item to be inserted is always nextLast.
     size is always the number of items in the AList.
     The last item in the list is always in position size - 1. */
-    public void resize(int capacity) {
+     private void resize(int capacity) {
         T[] a = (T []) new Object[capacity];
         System.arraycopy(items, 0, a, 0, size);
         items = a;
@@ -95,26 +88,24 @@ public class ArrayDeque<T> {
             return null;
         }
         else {
-            if (index > 0) {
-                return items[index - 1];
+            int res = nextFirst + index + 1;
+            if (res < items.length) {
+                return items[res];
             } else {
-                return items[items.length - 1 - index];
+                return items[-(items.length - res)];
             }
         }
     }
 
 //    public static void main(String[] args) {
-//        ArrayDeque<Integer> Y  = new ArrayDeque();
-//        ArrayDeque<Integer> X = new ArrayDeque(8);
-//        X.addFirst(1);
-//        X.addFirst(2);
-//        X.addLast(3);
-//        int get_value = X.get(2);
+//        ArrayDeque<Integer> X  = new ArrayDeque();
+////        X.addFirst(1);
+////        X.addFirst(2);
+//        X.addLast(0);
+//        int get_value = X.get(0);
 //        X.printDeque();
 //        int re_value = X.removeFirst();
 //        int size_val = X.size();
 //    }
-
-
 
 }

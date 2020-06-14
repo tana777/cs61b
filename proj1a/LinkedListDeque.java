@@ -21,13 +21,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T x) {
-        sentinel = new IntNode(null, null, null);
-        sentinel.next = new IntNode(x,sentinel,sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
-    }
-
     /** Adds item to the front of the list. */
     public void addFirst(T item) {
         if (size == 0) {
