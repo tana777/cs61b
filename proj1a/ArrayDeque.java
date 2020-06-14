@@ -73,6 +73,7 @@ public class ArrayDeque<T> {
         T returnItem = items[nextFirst + 1];
         items[nextFirst + 1] = null;
         size = size - 1;
+        nextFirst = nextFirst + 1;
         return returnItem;
     }
 
@@ -80,6 +81,7 @@ public class ArrayDeque<T> {
         T returnItem = items[nextLast - 1];
         items[nextLast - 1] = null;
         size = size - 1;
+        nextLast = nextLast - 1;
         return returnItem;
     }
 
@@ -99,8 +101,20 @@ public class ArrayDeque<T> {
 
 //    public static void main(String[] args) {
 //        ArrayDeque<Integer> X  = new ArrayDeque();
-////        X.addFirst(1);
-////        X.addFirst(2);
+//        boolean b = X.isEmpty();
+//        X.addFirst(1);
+//        int r = X.removeLast();
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        X.addFirst(6);
+//        X.addFirst(7);
+//        X.addFirst(8);
+//        X.addLast(9);
+//        int rr = X.removeLast();
+
+//
+//
 //        X.addLast(0);
 //        int get_value = X.get(0);
 //        X.printDeque();
