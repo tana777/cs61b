@@ -114,7 +114,7 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if (size == 0) {
-             return null;
+            return null;
         }
         if (size < items.length * 0.25 & items.length >= 16) {
             resize(size + 1, "down");
