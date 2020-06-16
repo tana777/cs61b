@@ -14,14 +14,11 @@ public class ArrayDeque<T> {
     The position of the next item to be inserted is always nextLast.
     size is always the number of items in the AList.
     The last item in the list is always in position size - 1. */
-     private void resize(int capacity, String action) {
+    private void resize(int capacity, String action) {
         T[] a = (T []) new Object[capacity];
         if (action == "up") {
-            if ((nextFirst - nextLast == items.length-1) || (nextLast - nextFirst == items.length -1))
-            {
-
+            if ((nextFirst - nextLast == items.length - 1) || (nextLast - nextFirst == items.length - 1)) {
                 System.arraycopy(items, 0, a, 0, size);
-
             } else {
                 System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
                 System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
@@ -39,15 +36,12 @@ public class ArrayDeque<T> {
                 }
             } else {
                 System.arraycopy(items, nextFirst + 1, a, 0, size);
-
             }
             nextFirst = capacity - 1;
             nextLast = size;
             items = a;
-            }
-
         }
-
+    }
 
     public void addLast(T x) {
         if (size == items.length) {
@@ -71,7 +65,6 @@ public class ArrayDeque<T> {
             nextFirst = nextFirst - 1;
         } else {
             nextFirst = items.length - 1 - nextFirst;
-
         }
         size = size + 1;
     }
@@ -88,7 +81,6 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-
         for (int i = nextFirst + 1; i < items.length; i++) {
             System.out.print(items[i] + " ");
         }
@@ -108,14 +100,14 @@ public class ArrayDeque<T> {
         T returnItem;
         if (nextFirst + 1 >= items.length) {
             returnItem = items[items.length - (nextFirst + 1)];
-             items[items.length - (nextFirst + 1)] = null;
-             size = size - 1;
-             nextFirst = items.length - (nextFirst + 1);
+            items[items.length - (nextFirst + 1)] = null;
+            size = size - 1;
+            nextFirst = items.length - (nextFirst + 1);
         } else {
             returnItem = items[nextFirst + 1];
-             items[nextFirst + 1] = null;
-             size = size - 1;
-             nextFirst = nextFirst + 1;
+            items[nextFirst + 1] = null;
+            size = size - 1;
+            nextFirst = nextFirst + 1;
         }
         return returnItem;
     }
@@ -124,9 +116,9 @@ public class ArrayDeque<T> {
          if (size == 0) {
              return null;
          }
-        if (size < items.length * 0.25 & items.length >= 16) {
-            resize(size + 1, "down");
-        }
+         if (size < items.length * 0.25 & items.length >= 16) {
+             resize(size + 1, "down");
+         }
          T returnItem;
          if (nextLast - 1 < 0) {
              returnItem = items[items.length - nextLast - 1];
@@ -155,33 +147,4 @@ public class ArrayDeque<T> {
             }
         }
     }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> X  = new ArrayDeque();
-        X.addLast(0);
-        X.addFirst(1);
-        X.removeLast();
-        X.get(0);
-        X.addLast(4);
-        X.get(0);
-        X.addLast(6);
-        X.addLast(7);
-        X.removeLast();
-        X.addFirst(9);
-        X.addFirst(10);
-        X.addFirst(11);
-        X.addLast(12);
-        X.addLast(13);
-        X.addLast(14);
-        X.removeFirst();
-        X.removeLast();
-        X.addFirst(17);
-        X.addFirst(18);
-        X.removeLast();
-        X.removeLast();
-        X.removeFirst();
-
-
-    }
-
 }
