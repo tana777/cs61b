@@ -37,9 +37,6 @@ public class ArrayDeque<T> {
                 items = a;
             }
 
-
-
-
         }
 
     }
@@ -97,8 +94,8 @@ public class ArrayDeque<T> {
          if (size == 0) {
              return null;
          }
-        if (size < items.length * 0.25) {
-            resize(size * 2, "down");
+        if (size < items.length * 0.25 & items.length >= 16) {
+            resize(size, "down");
         }
         T returnItem;
         if (nextFirst + 1 >= items.length) {
@@ -119,8 +116,8 @@ public class ArrayDeque<T> {
          if (size == 0) {
              return null;
          }
-        if (size < items.length * 0.25) {
-            resize(size * 2, "down");
+        if (size < items.length * 0.25 & items.length >= 16) {
+            resize(size, "down");
         }
          T returnItem;
          if (nextLast - 1 < 0) {
@@ -153,48 +150,14 @@ public class ArrayDeque<T> {
 
 //    public static void main(String[] args) {
 //        ArrayDeque<Integer> X  = new ArrayDeque();
-//        X.addFirst(0);
-//        X.addFirst(2);
-//        X.addFirst(3);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        X.addFirst(2);
-//        X.addFirst(3);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        X.addFirst(2);
-//        X.addFirst(3);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        X.addFirst(2);
-//        X.addFirst(3);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        X.addFirst(2);
-//        X.addFirst(3);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        int r1 = X.removeLast();
-//        int r2 = X.removeLast();
-//        int r3 = X.removeLast();
-//        int r4 = X.removeLast();
-//        int r5 = X.removeLast();
-//        int r6 = X.removeLast();
-//        int r7 = X.removeLast();
-//        int r8 = X.removeLast();
-//        int r9 = X.removeLast();
-//        int r10 = X.removeLast();
-//        int r11 = X.removeLast();
-//        int r12= X.removeLast();
-//        int r13 = X.removeLast();
-//        int r14 = X.removeLast();
-//        X.printDeque();
-//        int r15 = X.removeLast();
-//        int r16 = X.removeLast();
-//        int r17 = X.removeLast();
-//        int r18= X.removeLast();
+//        boolean y = X.isEmpty();
+//        boolean yy = X.isEmpty();
 //
-
+//        X.addFirst(2);
+//        int t = X.removeLast();
+//        X.addFirst(4);
+//        int tt = X.removeLast();
+//
 //    }
 
 }
