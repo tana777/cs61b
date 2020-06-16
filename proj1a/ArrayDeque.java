@@ -30,16 +30,24 @@ public class ArrayDeque<T> {
             nextLast = size;
             items = a;
         } else {
-            if (nextFirst + 1 < items.length & nextLast < items.length) {
-                System.arraycopy(items, nextFirst + 1, a, 0, nextLast - nextFirst - 1);
-                nextFirst = capacity - 1;
-                nextLast = size;
-                items = a;
+            if (nextFirst > nextLast) {
+                for (int i = 0; i < (items.length - nextFirst - 1); i++) {
+                    a[i] = items[nextFirst + 1 + i];
+                }
+                for (int i = 0; i < nextLast; i++) {
+                    a[(items.length - nextFirst - 1) + i] = items[i];
+                }
+            } else {
+                System.arraycopy(items, nextFirst + 1, a, 0, size);
+
+            }
+            nextFirst = capacity - 1;
+            nextLast = size;
+            items = a;
             }
 
         }
 
-    }
 
     public void addLast(T x) {
         if (size == items.length) {
@@ -148,30 +156,32 @@ public class ArrayDeque<T> {
         }
     }
 
-//    public static void main(String[] args) {
-//        ArrayDeque<Integer> X  = new ArrayDeque();
-//        X.addLast(0);
-//        X.addLast(1);
-//        X.addFirst(2);
-//        int g1 = X.get(2);
-//        X.addFirst(4);
-//        X.addFirst(5);
-//        X.addLast(6);
-//        X.addFirst(7);
-//        X.addLast(8);
-//        int t = X.removeLast();
-//        X.addFirst(10);
-//        X.addLast(11);
-//        int t1 = X.removeFirst();
-//        int g2 = X.get(2);
-//        int t2 = X.removeFirst();
-//        int g3 = X.get(3);
-//        int g4 = X.get(3);
-//        int g5 = X.get(6);
-//        int t3 = X.removeFirst();
-//        int g6 = X.get(0);
-//        X.addLast(20);
-//
-//    }
+    public static void main(String[] args) {
+        ArrayDeque<Integer> X  = new ArrayDeque();
+        X.addLast(0);
+        X.addFirst(1);
+        X.removeLast();
+        X.get(0);
+        X.addLast(4);
+        X.get(0);
+        X.addLast(6);
+        X.addLast(7);
+        X.removeLast();
+        X.addFirst(9);
+        X.addFirst(10);
+        X.addFirst(11);
+        X.addLast(12);
+        X.addLast(13);
+        X.addLast(14);
+        X.removeFirst();
+        X.removeLast();
+        X.addFirst(17);
+        X.addFirst(18);
+        X.removeLast();
+        X.removeLast();
+        X.removeFirst();
+
+
+    }
 
 }
