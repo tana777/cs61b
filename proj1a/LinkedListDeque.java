@@ -68,7 +68,8 @@ public class LinkedListDeque<T> {
         }
     }
 
-    /** Removes and returns the item at the front of the deque. If no such item exists, returns null. */
+    /** Removes and returns the item at the front of the deque.
+     * If no such item exists, returns null. */
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -80,7 +81,8 @@ public class LinkedListDeque<T> {
         return val;
     }
 
-    /** Removes and returns the item at the back of the deque. If no such item exists, return null. */
+    /** Removes and returns the item at the back of the deque.
+     * If no such item exists, return null. */
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -92,7 +94,8 @@ public class LinkedListDeque<T> {
         return val;
     }
 
-    /** Gets the item at the given index, if no such item exits, returns null. Must not alter the deque. */
+    /** Gets the item at the given index, if no such item exits,
+     * returns null. Must not alter the deque. */
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -112,7 +115,7 @@ public class LinkedListDeque<T> {
         if (i == 0) {
             return p.next;
         }
-        return helper(p.next, i-1);
+        return helper(p.next, i - 1);
     }
 
 
@@ -126,26 +129,4 @@ public class LinkedListDeque<T> {
         }
         return v.item;
     }
-
-
-//    public static void main(String[] args) {
-//        LinkedListDeque<Integer> y = new LinkedListDeque<>(9);
-//        boolean yy = y.isEmpty();
-//        int sizeY = y.size();
-//        y.printDeque();
-//        int removeFy =  y.removeFirst();
-//        Integer removeLy =  y.removeLast();
-//        Integer get_value_y = y.get(1);
-//
-//        LinkedListDeque<String> x = new LinkedListDeque("new");
-//        x.addFirst("A");
-//        x.addLast("B");
-//        boolean xx = x.isEmpty();
-//        int sizeX = x.size();
-//        x.printDeque();
-//        int sizeX_after = x.size();
-//        String get_value_re = x.getRecursive(1);
-//        String get_value_x = x.get(0);
-//
-//    }
 }

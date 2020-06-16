@@ -16,8 +16,8 @@ public class ArrayDeque<T> {
     The last item in the list is always in position size - 1. */
     private void resize(int capacity, String action) {
         T[] a = (T []) new Object[capacity];
-        if (action == "up") {
-            if ((nextFirst - nextLast == items.length - 1) || (nextLast - nextFirst == items.length - 1)) {
+        if (action.equals("up")) {
+            if (Math.abs(nextFirst - nextLast) == items.length - 1) {
                 System.arraycopy(items, 0, a, 0, size);
             } else {
                 System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
@@ -91,9 +91,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-         if (size == 0) {
-             return null;
-         }
+        if (size == 0) {
+            return null;
+        }
         if (size < items.length * 0.25 & items.length >= 16) {
             resize(size + 1, "down");
         }
@@ -113,32 +113,31 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-         if (size == 0) {
+        if (size == 0) {
              return null;
-         }
-         if (size < items.length * 0.25 & items.length >= 16) {
-             resize(size + 1, "down");
-         }
-         T returnItem;
-         if (nextLast - 1 < 0) {
-             returnItem = items[items.length - nextLast - 1];
-             items[items.length - nextLast - 1] = null;
-             size = size - 1;
-             nextLast = items.length - nextLast - 1;
-         } else {
-             returnItem = items[nextLast - 1];
-             items[nextLast - 1] = null;
-             size = size - 1;
-             nextLast = nextLast - 1;
-         }
-         return returnItem;
+        }
+        if (size < items.length * 0.25 & items.length >= 16) {
+            resize(size + 1, "down");
+        }
+        T returnItem;
+        if (nextLast - 1 < 0) {
+            returnItem = items[items.length - nextLast - 1];
+            items[items.length - nextLast - 1] = null;
+            size = size - 1;
+            nextLast = items.length - nextLast - 1;
+        } else {
+            returnItem = items[nextLast - 1];
+            items[nextLast - 1] = null;
+            size = size - 1;
+            nextLast = nextLast - 1;
+        }
+        return returnItem;
     }
 
     public T get(int index) {
         if (index >= items.length) {
             return null;
-        }
-        else {
+        } else {
             int res = nextFirst + index + 1;
             if (res < items.length) {
                 return items[res];
