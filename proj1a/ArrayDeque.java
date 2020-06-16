@@ -95,7 +95,7 @@ public class ArrayDeque<T> {
              return null;
          }
         if (size < items.length * 0.25 & items.length >= 16) {
-            resize(size, "down");
+            resize(size + 1, "down");
         }
         T returnItem;
         if (nextFirst + 1 >= items.length) {
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
              return null;
          }
         if (size < items.length * 0.25 & items.length >= 16) {
-            resize(size, "down");
+            resize(size + 1, "down");
         }
          T returnItem;
          if (nextLast - 1 < 0) {
@@ -150,13 +150,27 @@ public class ArrayDeque<T> {
 
 //    public static void main(String[] args) {
 //        ArrayDeque<Integer> X  = new ArrayDeque();
-//        boolean y = X.isEmpty();
-//        boolean yy = X.isEmpty();
-//
+//        X.addLast(0);
+//        X.addLast(1);
 //        X.addFirst(2);
-//        int t = X.removeLast();
+//        int g1 = X.get(2);
 //        X.addFirst(4);
-//        int tt = X.removeLast();
+//        X.addFirst(5);
+//        X.addLast(6);
+//        X.addFirst(7);
+//        X.addLast(8);
+//        int t = X.removeLast();
+//        X.addFirst(10);
+//        X.addLast(11);
+//        int t1 = X.removeFirst();
+//        int g2 = X.get(2);
+//        int t2 = X.removeFirst();
+//        int g3 = X.get(3);
+//        int g4 = X.get(3);
+//        int g5 = X.get(6);
+//        int t3 = X.removeFirst();
+//        int g6 = X.get(0);
+//        X.addLast(20);
 //
 //    }
 
