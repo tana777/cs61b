@@ -16,8 +16,20 @@ public class ArrayDeque<T> {
     The last item in the list is always in position size - 1. */
      private void resize(int capacity) {
         T[] a = (T []) new Object[capacity];
-        System.arraycopy(items, 0, a, 0, size);
-        items = a;
+        if ((nextFirst - nextLast == items.length-1) || (nextLast - nextFirst == items.length -1))
+        {
+
+            System.arraycopy(items, 0, a, 0, size);
+
+        } else {
+
+            System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
+            System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
+
+        }
+         nextFirst = capacity - 1;
+         nextLast = size;
+         items = a;
     }
 
     public void addLast(T x) {
@@ -112,28 +124,22 @@ public class ArrayDeque<T> {
             }
         }
     }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> X  = new ArrayDeque();
-        X.addFirst(0);
-        X.addLast(1);
-        X.addLast(2);
-        X.addLast(3);
-        X.addLast(4);
-        X.addLast(5);
-        X.addLast(6);
-        int r = X.removeLast();
-        X.addLast(7);
-        int rr = X.removeLast();
-
-
-
 //
-//        X.addLast(0);
-//        int get_value = X.get(0);
-//        X.printDeque();
-//        int re_value = X.removeFirst();
-//        int size_val = X.size();
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque<Integer> X  = new ArrayDeque();
+//        X.addFirst(0);
+//        X.addLast(1);
+//        X.addLast(2);
+//        X.addLast(3);
+//        X.addFirst(4);
+//        X.addLast(5);
+//        X.addFirst(6);
+//        int r = X.removeLast();
+//        X.addLast(8);
+//        X.addLast(9);
+//        X.addFirst(10);
+//        int rr = X.removeLast();
+//
+//    }
 
 }
