@@ -14,27 +14,39 @@ public class ArrayDeque<T> {
     The position of the next item to be inserted is always nextLast.
     size is always the number of items in the AList.
     The last item in the list is always in position size - 1. */
-     private void resize(int capacity) {
+     private void resize(int capacity, String action) {
         T[] a = (T []) new Object[capacity];
-        if ((nextFirst - nextLast == items.length-1) || (nextLast - nextFirst == items.length -1))
-        {
+        if (action == "up") {
+            if ((nextFirst - nextLast == items.length-1) || (nextLast - nextFirst == items.length -1))
+            {
 
-            System.arraycopy(items, 0, a, 0, size);
+                System.arraycopy(items, 0, a, 0, size);
 
+            } else {
+                System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
+                System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
+            }
+            nextFirst = capacity - 1;
+            nextLast = size;
+            items = a;
         } else {
+            if (nextFirst + 1 < items.length & nextLast < items.length) {
+                System.arraycopy(items, nextFirst + 1, a, 0, nextLast - nextFirst - 1);
+                nextFirst = capacity - 1;
+                nextLast = size;
+                items = a;
+            }
 
-            System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-            System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast);
+
+
 
         }
-         nextFirst = capacity - 1;
-         nextLast = size;
-         items = a;
+
     }
 
     public void addLast(T x) {
         if (size == items.length) {
-            resize(size * 4);
+            resize(size * 4, "up");
         }
         items[nextLast] = x;
         if (nextLast < items.length - 1) {
@@ -47,7 +59,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T y) {
         if (size == items.length) {
-            resize(size * 4);
+            resize(size * 4, "up");
         }
         items[nextFirst] = y;
         if (nextFirst > 0) {
@@ -85,6 +97,9 @@ public class ArrayDeque<T> {
          if (size == 0) {
              return null;
          }
+        if (size < items.length * 0.25) {
+            resize(size * 2, "down");
+        }
         T returnItem;
         if (nextFirst + 1 >= items.length) {
             returnItem = items[items.length - (nextFirst + 1)];
@@ -104,6 +119,9 @@ public class ArrayDeque<T> {
          if (size == 0) {
              return null;
          }
+        if (size < items.length * 0.25) {
+            resize(size * 2, "down");
+        }
          T returnItem;
          if (nextLast - 1 < 0) {
              returnItem = items[items.length - nextLast - 1];
@@ -133,17 +151,50 @@ public class ArrayDeque<T> {
         }
     }
 
-    public static void main(String[] args) {
-        ArrayDeque<Integer> X  = new ArrayDeque();
-        X.addFirst(0);
-        int r = X.removeLast();
-        X.addFirst(2);
-        X.addFirst(3);
-        X.addFirst(4);
-        X.addFirst(5);
-        int rr = X.removeLast();
+//    public static void main(String[] args) {
+//        ArrayDeque<Integer> X  = new ArrayDeque();
+//        X.addFirst(0);
+//        X.addFirst(2);
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        X.addFirst(2);
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        X.addFirst(2);
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        X.addFirst(2);
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        X.addFirst(2);
+//        X.addFirst(3);
+//        X.addFirst(4);
+//        X.addFirst(5);
+//        int r1 = X.removeLast();
+//        int r2 = X.removeLast();
+//        int r3 = X.removeLast();
+//        int r4 = X.removeLast();
+//        int r5 = X.removeLast();
+//        int r6 = X.removeLast();
+//        int r7 = X.removeLast();
+//        int r8 = X.removeLast();
+//        int r9 = X.removeLast();
+//        int r10 = X.removeLast();
+//        int r11 = X.removeLast();
+//        int r12= X.removeLast();
+//        int r13 = X.removeLast();
+//        int r14 = X.removeLast();
+//        X.printDeque();
+//        int r15 = X.removeLast();
+//        int r16 = X.removeLast();
+//        int r17 = X.removeLast();
+//        int r18= X.removeLast();
+//
 
-
-    }
+//    }
 
 }
