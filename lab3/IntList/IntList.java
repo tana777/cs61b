@@ -276,10 +276,7 @@ public class IntList {
      * as an input, returns null.
      */
     public static IntList reverse(IntList A) {
-        if (A == null) {
-            return null;
-        }
-        if (A.rest == null) {
+        if (A == null || A.rest == null) {
             return A;
         }
         IntList tmp = null;
