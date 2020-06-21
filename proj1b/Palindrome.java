@@ -44,7 +44,9 @@ public class Palindrome {
         for (int i = 0; i < j; i++) {
             char x = (char) d.removeFirst();
             char y = (char) d.removeLast();
-            if (cc.equalChars(x, y)) {
+            char xx = Character.toLowerCase(x);
+            char yy = Character.toLowerCase(y);
+            if (cc.equalChars(xx, yy)) {
                 continue;
             } else {
                 return false;

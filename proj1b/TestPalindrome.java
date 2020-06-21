@@ -26,18 +26,19 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("A"));
         assertTrue(palindrome.isPalindrome(null));
         assertTrue(palindrome.isPalindrome("kakkak"));
-        assertTrue(palindrome.isPalindrome("reviver"));
+        assertTrue(palindrome.isPalindrome("Reviver"));
+
 
     }
 
     @Test
     public void testnewisPalindrome() {
         assertTrue(palindrome.isPalindrome("tops", offByOne));
-        assertTrue(palindrome.isPalindrome("truss", offByOne));
+        assertTrue(palindrome.isPalindrome("Truss", offByOne));
         assertTrue(palindrome.isPalindrome("", offByOne));
         assertTrue(palindrome.isPalindrome("a", offByOne));
         assertFalse(palindrome.isPalindrome("picture", offByOne));
-        assertFalse(palindrome.isPalindrome("Tops", offByOne));
+        assertTrue(palindrome.isPalindrome("Tops", offByOne));
 
     }
 
