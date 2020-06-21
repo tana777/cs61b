@@ -6,8 +6,6 @@ public class TestPalindrome {
     // new Palindromes, or the autograder might be upset.
     static Palindrome palindrome = new Palindrome();
 
-    static OffByOne offByOne = new OffByOne();
-
     @Test
     public void testWordToDeque() {
         Deque d = palindrome.wordToDeque("persiflage");
@@ -17,29 +15,70 @@ public class TestPalindrome {
         }
         assertEquals("persiflage", actual);
     }
-//    Uncomment this class once you've created your Palindrome class.
 
+    /** Unit Tests for isPalindrome.
+     *
+     *  Task 3A: isPalindrome Testing
+     *
+     */
     @Test
     public void testisPalindrome() {
-        assertFalse(palindrome.isPalindrome("friday"));
-        assertFalse(palindrome.isPalindrome("BUtTER"));
         assertTrue(palindrome.isPalindrome("A"));
-        assertTrue(palindrome.isPalindrome(null));
-        assertTrue(palindrome.isPalindrome("kakkak"));
-        assertTrue(palindrome.isPalindrome("reviver"));
-
-
     }
 
     @Test
-    public void testPalindrome() {
-        assertTrue(palindrome.isPalindrome("tops", offByOne));
-        assertTrue(palindrome.isPalindrome("truss", offByOne));
-        assertTrue(palindrome.isPalindrome("", offByOne));
-        assertTrue(palindrome.isPalindrome("a", offByOne));
-        assertFalse(palindrome.isPalindrome("picture", offByOne));
-        assertTrue(palindrome.isPalindrome("tops", offByOne));
-
+    public void testisPalindrome2() {
+        assertTrue(palindrome.isPalindrome("kakkak"));
     }
 
+    @Test
+    public void testisPalindrome3() {
+        assertFalse(palindrome.isPalindrome("Reviver"));
+    }
+
+
+    /** Unit Tests for isPalindrome with OffByOne. */
+    @Test
+    public void testPalindrome() {
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("tops", offByOne));
+    }
+
+    @Test
+    public void testPalindrome2() {
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("a", offByOne));
+    }
+
+    @Test
+    public void testPalindrome3() {
+        OffByOne offByOne = new OffByOne();
+        assertFalse(palindrome.isPalindrome("Tops", offByOne));
+    }
+
+    @Test
+    public void testPalindrome4() {
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("TrusS", offByOne));
+    }
+
+    /** Unit Tests for isPalindrome with OffByN.
+     */
+    @Test
+    public void testNPalindrome() {
+        OffByN offBy3 = new OffByN(3);
+        assertTrue(palindrome.isPalindrome("wort", offBy3));
+    }
+
+    @Test
+    public void testNPalindrome2() {
+        OffByN offBy3 = new OffByN(3);
+        assertFalse(palindrome.isPalindrome("Wort", offBy3));
+    }
+
+    @Test
+    public void testNPalindrome3() {
+        OffByN offBy5 = new OffByN(5);
+        assertTrue(palindrome.isPalindrome("tiffany", offBy5));
+    }
 }
