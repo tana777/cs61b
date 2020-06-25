@@ -1,5 +1,5 @@
 package synthesizer;
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.Iterator;
 
 /** HW 1: Packages, Interfaces, Generics, Exceptions, Iteration
@@ -37,8 +37,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * covered Monday.
      */
     @Override
-    public void enqueue(Object x) {
-        // TODO: Enqueue the item. Don't forget to increase fillCount and update last.
+    public void enqueue(T x) {
         if (isFull()) {
             throw new RuntimeException("Ring Buffer Overflow");
         }
@@ -58,7 +57,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      */
     @Override
     public T dequeue() {
-        // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
         if (isEmpty()) {
             throw new RuntimeException("Ring Buffer Underflow");
         }
@@ -77,7 +75,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      */
     @Override
     public T peek() {
-        // TODO: Return the first item. None of your instance variables should change.
         if (isEmpty()) {
             throw new RuntimeException("Ring Buffer Underflow");
         }
@@ -88,15 +85,13 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     }
 
     @Override
-    public Iterator iterator() {
-        return new queueIterator();
+    public Iterator<T> iterator() {
+        return new QueueIterator();
     }
 
-
-    // TODO: When you get to part 5, implement the needed code to support iteration.
-    private class queueIterator implements Iterator<T> {
+    private class QueueIterator implements Iterator<T> {
         private int ptr;
-        public queueIterator() {
+        public QueueIterator() {
             ptr = first;
         }
         public boolean hasNext() {
