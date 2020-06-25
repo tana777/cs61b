@@ -15,8 +15,6 @@ public class TestArrayRingBuffer {
         arb.enqueue(5);
         arb.dequeue();
         arb.dequeue();
-        arb.dequeue();
-        arb.dequeue();
 
     }
 

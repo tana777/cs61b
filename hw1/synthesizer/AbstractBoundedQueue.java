@@ -7,7 +7,7 @@ package synthesizer;
  *  @author tanagegen 06/23/2020
  *
  */
-public abstract class AbstractBoundedQueue implements BoundedQueue {
+public abstract class AbstractBoundedQueue<T> implements BoundedQueue<T> {
     protected int fillCount;
     protected int capacity;
 
