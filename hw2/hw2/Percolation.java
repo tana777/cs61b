@@ -77,17 +77,17 @@ public class Percolation {
         int current = xyTo1D(row, col);
 
         if (row + 1 < len) {
-            int up = xyTo1D(row + 1, col);
-            if (status[up] && (!uf.connected(current, up) || !uf.connected(current, up))) {
-                uf.union(current, up);
-                uf2.union(current, up);
-            }
-        }
-        if (row - 1 >= 0) {
-            int down = xyTo1D(row - 1, col);
+            int down = xyTo1D(row + 1, col);
             if (status[down] && (!uf.connected(current, down) || !uf2.connected(current, down))) {
                 uf.union(current, down);
                 uf2.union(current, down);
+            }
+        }
+        if (row - 1 >= 0) {
+            int up = xyTo1D(row - 1, col);
+            if (status[up] && (!uf.connected(current, up) || !uf2.connected(current, up))) {
+                uf.union(current, up);
+                uf2.union(current, up);
             }
         }
         if (col - 1 >= 0) {
@@ -184,14 +184,19 @@ public class Percolation {
         use for unit testing (not required)
      */
     public static void main(String[] args) {
-        Percolation rock = new Percolation(2);
-        rock.open(0, 1);
-        boolean f1 = rock.isFull(0, 1);
-        rock.open(1, 1);
-        boolean f2 = rock.isFull(1, 1);
-        boolean p1 = rock.percolates();
+        Percolation rock = new Percolation(3);
+        rock.open(2, 0);
+        boolean f1 = rock.isFull(2, 0);
         rock.open(1, 0);
-        boolean f4 = rock.isFull(0, 0);
+        boolean f2 = rock.isFull(1, 0);
+        boolean p1 = rock.percolates();
+        rock.open(0, 0);
+        boolean p2 = rock.percolates();
+        rock.open(2, 2);
+        rock.open(1, 2);
+        rock.open(0, 2);
+        boolean f4 = rock.isFull(0, 2);
+        boolean f5 = rock.isFull(1, 2);
         boolean p3 = rock.percolates();
     }
 }
