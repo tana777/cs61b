@@ -29,9 +29,9 @@ public class Percolation {
         virtualtop = N * N;
         virtualbottom = N * N + 1;
         len = N;
-        status = new boolean[N * N];
+        status = new boolean[N * N + 2];
         uf = new WeightedQuickUnionUF(N * N + 2);
-        uf2 = new WeightedQuickUnionUF((N * N));
+        uf2 = new WeightedQuickUnionUF((N * N + 1));
         connectVirtual();
         openSize = 0;
         int num = 0;
@@ -52,6 +52,7 @@ public class Percolation {
     private void connectVirtual() {
         for (int i = 0; i < len; i++) {
             uf.union(virtualtop, i);
+            uf2.union(virtualtop, i);
         }
         for (int i = len * (len - 1); i < len * len; i++) {
             uf.union(virtualbottom, i);
@@ -72,28 +73,28 @@ public class Percolation {
 
         if (row + 1 < len) {
             int up = xyTo1D(row + 1, col);
-            if (status[up] && !uf.connected(current, up)) {
+            if (status[up] && (!uf.connected(current, up) || !uf.connected(current, up))) {
                 uf.union(current, up);
                 uf2.union(current, up);
             }
         }
         if (row - 1 >= 0) {
             int down = xyTo1D(row - 1, col);
-            if (status[down] && !uf.connected(current, down)) {
+            if (status[down] && (!uf.connected(current, down) || !uf2.connected(current, down))) {
                 uf.union(current, down);
                 uf2.union(current, down);
             }
         }
         if (col - 1 >= 0) {
             int left = xyTo1D(row, col - 1);
-            if (status[left] && !uf.connected(current, left)) {
+            if (status[left] && (!uf.connected(current, left) || !uf2.connected(current, left))) {
                 uf.union(current, left);
                 uf2.union(current, left);
             }
         }
         if (col + 1 < len) {
             int right = xyTo1D(row, col + 1);
-            if (status[right] && !uf.connected(current, right)) {
+            if (status[right] && (!uf.connected(current, right) || !uf2.connected(current, right))) {
                 uf.union(current, right);
                 uf2.union(current, right);
             }
@@ -101,18 +102,24 @@ public class Percolation {
     }
 
     /*
-         open the site (row, col) if it is not open already
+        helper method to validate location l
      */
-    public void open(int row, int col) {
-        int l = xyTo1D(row, col);
+    private void validate(int l) {
         if (l < 0 || l > len * len) {
             throw new java.lang.IndexOutOfBoundsException();
         }
-        if (!status[l]) {
-            status[l] = true;
+    }
+
+    /*
+         open the site (row, col) if it is not open already
+     */
+    public void open(int row, int col) {
+        int location = xyTo1D(row, col);
+        validate(location);
+        if (!status[location]) {
+            status[location] = true;
             openSize = openSize + 1;
             unionNeighbours(row, col);
-
         }
     }
 
@@ -120,11 +127,9 @@ public class Percolation {
         is the site (row, col) open?
      */
     public boolean isOpen(int row, int col) {
-        int l = xyTo1D(row, col);
-        if (l < 0 || l > len * len) {
-            throw new java.lang.IndexOutOfBoundsException();
-        }
-        return status[l];
+        int location = xyTo1D(row, col);
+        validate(location);
+        return status[location];
     }
 
 
@@ -133,18 +138,8 @@ public class Percolation {
      */
     public boolean isFull(int row, int col) {
         int location = xyTo1D(row, col);
-        if (location < 0 || location > len * len) {
-            throw new java.lang.IndexOutOfBoundsException();
-        }
-        if (status[location]) {
-            for (int l = 0; l < len; l++) {
-                if (uf2.connected(l, location)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
+        validate(location);
+        return status[location] && uf2.connected(location, virtualtop);
     }
 
     /*
@@ -173,20 +168,17 @@ public class Percolation {
         use for unit testing (not required)
      */
     public static void main(String[] args) {
-//        Percolation rock = new Percolation(3);
-//        rock.open(0, 0);
-//        boolean f1 = rock.isFull(0, 0);
-//        rock.open(1, 0);
-//        boolean f2 = rock.isFull(1, 0);
-//        boolean p1 = rock.percolates();
-//        rock.open(1, 2);
-//        boolean f3 = rock.isFull(1, 2);
-//        boolean p2 = rock.percolates();
-//        rock.open(2, 2);
-//        rock.open(2, 0);
-//        boolean f4 = rock.isFull(2, 0);
-//        boolean f5 = rock.isFull(2, 2);
-//        boolean p3 = rock.percolates();
+        Percolation rock = new Percolation(3);
+        rock.open(0, 0);
+        boolean f1 = rock.isFull(0, 0);
+        rock.open(1, 0);
+        boolean f2 = rock.isFull(1, 0);
+        boolean p1 = rock.percolates();
+        rock.open(2, 0);
+        rock.open(2, 1);
+        boolean f4 = rock.isFull(2, 0);
+        boolean f5 = rock.isFull(2, 1);
+        boolean p3 = rock.percolates();
     }
 
 }
