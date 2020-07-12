@@ -25,27 +25,17 @@ public class PercolationStats {
         }
         len = N;
         times = T;
-        pl = pf.make(len);
-        record = new double[T];
-    }
-
-    /*
-        helper method
-     */
-    private void playGrid() {
-
+        record = new double[times];
         for (int t = 0; t < times; t++) {
-
+            pl = pf.make(len);
             while (!pl.percolates()) {
                 int row = StdRandom.uniform(0, len);
                 int col = StdRandom.uniform(0, len);
                 pl.open(row, col);
             }
-            record[t] = pl.numberOfOpenSites() / (len * len);
+            record[t] = pl.numberOfOpenSites() * 1.0  / (len * len);
         }
     }
-
-
 
     /*
         sample mean of percolation threshold
@@ -75,5 +65,15 @@ public class PercolationStats {
     public double confidenceHigh() {
         return mean() + (1.96 * stddev()) / Math.sqrt(times);
     }
+
+//    public static void main(String[] args) {
+//        PercolationFactory pf = new PercolationFactory();
+//        PercolationStats ps = new PercolationStats(3, 10, pf);
+//        double std = ps.stddev();
+//        double mean = ps.mean();
+//        double cil = ps.confidenceLow();
+//        double cih = ps.confidenceHigh();
+//
+//    }
 
 }
