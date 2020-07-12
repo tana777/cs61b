@@ -16,6 +16,7 @@ public class Percolation {
     private int[][] loc;
     private boolean[] status;
     private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF uf2;
     private int len;
     private int openSize;
     private int virtualtop;
@@ -30,6 +31,7 @@ public class Percolation {
         len = N;
         status = new boolean[N * N];
         uf = new WeightedQuickUnionUF(N * N + 2);
+        uf2 = new WeightedQuickUnionUF((N * N));
         connectVirtual();
         openSize = 0;
         int num = 0;
@@ -72,24 +74,28 @@ public class Percolation {
             int up = xyTo1D(row + 1, col);
             if (status[up] && !uf.connected(current, up)) {
                 uf.union(current, up);
+                uf2.union(current, up);
             }
         }
         if (row - 1 >= 0) {
             int down = xyTo1D(row - 1, col);
             if (status[down] && !uf.connected(current, down)) {
                 uf.union(current, down);
+                uf2.union(current, down);
             }
         }
         if (col - 1 >= 0) {
             int left = xyTo1D(row, col - 1);
             if (status[left] && !uf.connected(current, left)) {
                 uf.union(current, left);
+                uf2.union(current, left);
             }
         }
         if (col + 1 < len) {
             int right = xyTo1D(row, col + 1);
             if (status[right] && !uf.connected(current, right)) {
                 uf.union(current, right);
+                uf2.union(current, right);
             }
         }
     }
@@ -130,15 +136,14 @@ public class Percolation {
         if (location < 0 || location > len * len) {
             throw new java.lang.IndexOutOfBoundsException();
         }
-//        if (status[location]) {
-//            for (int l = 0; l < len; l++) {
-//                if (uf.connected(l, location)) {
-//                    return true;
-//                }
-//            }
-//        }
-        return status[location] && uf.connected(location, virtualtop);
-
+        if (status[location]) {
+            for (int l = 0; l < len; l++) {
+                if (uf2.connected(l, location)) {
+                    return true;
+                }
+            }
+        }
+        return false;
 
     }
 
