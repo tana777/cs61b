@@ -2,7 +2,7 @@ package hw2;
 
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
-import java.sql.Time;
+//import java.sql.Time;
 
 /** HW 2: Percolation
  *
