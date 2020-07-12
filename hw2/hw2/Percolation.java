@@ -26,10 +26,10 @@ public class Percolation {
             throw new java.lang.IllegalArgumentException();
         }
         virtualtop = N * N;
-        virtualbottom = N * N + 1 ;
+        virtualbottom = N * N + 1;
         len = N;
-        status = new boolean[N*N];
-        uf = new WeightedQuickUnionUF(N*N + 2);
+        status = new boolean[N * N];
+        uf = new WeightedQuickUnionUF(N * N + 2);
         connectVirtual();
         openSize = 0;
         int num = 0;
@@ -55,16 +55,10 @@ public class Percolation {
             uf.union(virtualbottom, i);
         }
     }
-
-    /*
-        helper method to solve backwash problem
-     */
-
-
     /*
         helper method to translate 2D to 1D.
      */
-    private int xyTo1D(int row, int col){
+    private int xyTo1D(int row, int col) {
         return loc[row][col];
     }
 
@@ -103,7 +97,7 @@ public class Percolation {
     /*
          open the site (row, col) if it is not open already
      */
-    public void open(int row, int col){
+    public void open(int row, int col) {
         int l = xyTo1D(row, col);
         if (l < 0 || l > len * len) {
             throw new java.lang.IndexOutOfBoundsException();
@@ -119,7 +113,7 @@ public class Percolation {
     /*
         is the site (row, col) open?
      */
-    public boolean isOpen(int row, int col){
+    public boolean isOpen(int row, int col) {
         int l = xyTo1D(row, col);
         if (l < 0 || l > len * len) {
             throw new java.lang.IndexOutOfBoundsException();
@@ -131,7 +125,7 @@ public class Percolation {
     /*
         is the site (row, col) full?
      */
-    public boolean isFull(int row, int col){
+    public boolean isFull(int row, int col) {
         int location = xyTo1D(row, col);
         if (location < 0 || location > len * len) {
             throw new java.lang.IndexOutOfBoundsException();
@@ -151,14 +145,14 @@ public class Percolation {
     /*
         number of open sites
      */
-    public int numberOfOpenSites(){
+    public int numberOfOpenSites() {
         return openSize;
     }
 
     /*
         does the system percolate?
      */
-    public boolean percolates(){
+    public boolean percolates() {
 //        for (int up = 0; up < len; up++) {
 //            for (int down = len * (len - 1); down < len * len; down++) {
 //                if (uf.connected(up, down)) {
@@ -173,17 +167,21 @@ public class Percolation {
     /*
         use for unit testing (not required)
      */
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        Percolation rock = new Percolation(3);
 //        rock.open(0, 0);
 //        boolean f1 = rock.isFull(0, 0);
-//        rock.open(0, 1);
-//        boolean f2 = rock.isFull(0, 1);
+//        rock.open(1, 0);
+//        boolean f2 = rock.isFull(1, 0);
 //        boolean p1 = rock.percolates();
-//        rock.open(1, 1);
+//        rock.open(1, 2);
+//        boolean f3 = rock.isFull(1, 2);
 //        boolean p2 = rock.percolates();
-//        rock.open(2, 1);
+//        rock.open(2, 2);
+//        rock.open(2, 0);
+//        boolean f4 = rock.isFull(2, 0);
+//        boolean f5 = rock.isFull(2, 2);
 //        boolean p3 = rock.percolates();
-//    }
+    }
 
 }

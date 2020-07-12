@@ -15,7 +15,7 @@ public class PercolationStats {
         perform T independent experiments on an N-by-N grid
      */
     private int len;
-    private int Times;
+    private int times;
     private Percolation pl;
     private double[] record;
 
@@ -24,7 +24,7 @@ public class PercolationStats {
             throw new java.lang.IllegalArgumentException();
         }
         len = N;
-        Times = T;
+        times = T;
         pl = pf.make(len);
         record = new double[T];
     }
@@ -32,9 +32,9 @@ public class PercolationStats {
     /*
         helper method
      */
-    public void playGrid() {
+    private void playGrid() {
 
-        for (int t = 0; t < Times; t++) {
+        for (int t = 0; t < times; t++) {
 
             while (!pl.percolates()) {
                 int row = StdRandom.uniform(0, len);
@@ -66,14 +66,14 @@ public class PercolationStats {
         low endpoint of 95% confidence interval
      */
     public double confidenceLow() {
-        return mean() - (1.96 * stddev()) / Math.sqrt(Times);
+        return mean() - (1.96 * stddev()) / Math.sqrt(times);
     }
 
     /*
         high endpoint of 95% confidence interval
      */
     public double confidenceHigh() {
-        return mean() + (1.96 * stddev()) / Math.sqrt(Times);
+        return mean() + (1.96 * stddev()) / Math.sqrt(times);
     }
 
 }
