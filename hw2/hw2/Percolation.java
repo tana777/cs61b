@@ -29,7 +29,7 @@ public class Percolation {
         virtualtop = N * N;
         virtualbottom = N * N + 1;
         len = N;
-        status = new boolean[N * N + 2];
+        status = new boolean[N * N];
         uf = new WeightedQuickUnionUF(N * N + 2);
         uf2 = new WeightedQuickUnionUF((N * N + 1));
         if (len >= 2) {
@@ -172,15 +172,10 @@ public class Percolation {
 //        return false;
         if (len == 1 && openSize == 1) {
             return true;
-        }
-        else if (len == 1 && openSize == 0) {
+        } else if (len == 1 && openSize == 0) {
             return false;
-        }
-        else if (len == 2) {
-            for (int i = len; i < len * len; i++) {
-                return uf.connected(virtualtop, i);
-            }
-            return false;
+        } else if (len == 2) {
+            return (uf.connected(virtualtop, 2) || uf.connected(virtualtop, 3));
         }
         return uf.connected(virtualtop, virtualbottom);
     }
@@ -190,14 +185,13 @@ public class Percolation {
      */
     public static void main(String[] args) {
         Percolation rock = new Percolation(2);
-        rock.open(0, 0);
-        boolean f1 = rock.isFull(0, 0);
+        rock.open(0, 1);
+        boolean f1 = rock.isFull(0, 1);
         rock.open(1, 1);
         boolean f2 = rock.isFull(1, 1);
         boolean p1 = rock.percolates();
         rock.open(1, 0);
-        boolean f4 = rock.isFull(1, 0);
+        boolean f4 = rock.isFull(0, 0);
         boolean p3 = rock.percolates();
     }
-
 }
