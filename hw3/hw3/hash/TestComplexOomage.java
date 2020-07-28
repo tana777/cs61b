@@ -1,11 +1,15 @@
 package hw3.hash;
 
-import edu.princeton.cs.algs4.Complex;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+
 
 public class TestComplexOomage {
 
@@ -33,7 +37,7 @@ public class TestComplexOomage {
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
     }
 
-    /* TODO: Create a list of Complex Oomages called deadlyList
+    /* Create a list of Complex Oomages called deadlyList
      * that shows the flaw in the hashCode function.
      */
 
@@ -47,8 +51,7 @@ public class TestComplexOomage {
             List<Integer> aList = Arrays.asList(intArray);
             ComplexOomage coA = new ComplexOomage(aList);
             deadlyList.add(coA);
-            }
-        // Your code here.
+        }
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
     }
 
