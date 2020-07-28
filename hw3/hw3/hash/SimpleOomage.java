@@ -10,7 +10,6 @@ import edu.princeton.cs.algs4.StdDraw;
  */
 
 
-
 public class SimpleOomage implements Oomage {
     protected int red;
     protected int green;
@@ -33,9 +32,15 @@ public class SimpleOomage implements Oomage {
      */
     @Override
     public boolean equals(Object o) {
-        if (o == null) { return false; }
-        if (o == this) { return true; }
-        if (o.getClass() != this.getClass()) { return false; }
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
         SimpleOomage t = (SimpleOomage) o;
         return (this.blue == t.blue) && (this.green == t.green) && (this.red == t.red);
     }
