@@ -185,7 +185,15 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
+        if (size == 0) {
+            return null;
+        }
         Node minRes = new ArrayHeap<T>.Node(contents[1].myItem, contents[1].myPriority);
+        if (size == 1) {
+            contents[size] = null;
+            size = size - 1;
+            return minRes.myItem;
+        }
         swap(1, size);
         contents[size] = null;
         sink(1);
