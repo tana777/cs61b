@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author Tana Gegen 7/30/20
  */
+
 public class MyTrieSet implements TrieSet61B {
 
     private static final int R = 128; // ASCII
@@ -63,19 +64,16 @@ public class MyTrieSet implements TrieSet61B {
         Node ptr = root;
         for (int i = 0; i< key.length(); i++) {
             int num = key.charAt(i);
-            if (ptr.next.items[num] != null) {
-                ptr = (Node) ptr.next.items[num];
-                if (i == key.length() - 1) {
-                    ptr.isKey = true;
-                }
-
-            } else {
+            if (ptr.next.items[num] == null) {
                 if (i == key.length() - 1) {
                     ptr.next.items[num] = new Node(true, R);
                 } else {
                     ptr.next.items[num] = new Node(false, R);
                 }
-                ptr = (Node) ptr.next.items[num];
+            }
+            ptr = (Node) ptr.next.items[num];
+            if (i == key.length() - 1) {
+                ptr.isKey = true;
             }
         }
     }
