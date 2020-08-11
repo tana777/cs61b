@@ -23,6 +23,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     public MazeBreadthFirstPaths(Maze m, int sourceX, int sourceY, int targetX, int targetY) {
         super(m);
         maze = m;
+
         s = maze.xyTo1D(sourceX, sourceY);
         t = maze.xyTo1D(targetX, targetY);
         distTo[s] = 0;
@@ -33,7 +34,9 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     private void bfs() {
 
         Queue<Integer> q = new LinkedList<>();
+        marked[s] = true;
         q.add(s);
+        announce();
 
         while (!q.isEmpty()) {
             int v = q.remove();
@@ -44,7 +47,6 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
             for (int w : maze.adj(v)) {
                 if (!marked[w]) {
                     edgeTo[w] = v;
-                    announce();
                     distTo[w] = distTo[v] + 1;
                     marked[w] = true;
                     announce();
