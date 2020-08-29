@@ -1,4 +1,6 @@
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.Quick;
 
 public class QuickSort {
     /**
@@ -72,25 +74,43 @@ public class QuickSort {
             Queue<Item> greater = new Queue<>();
             partition(items, pivot, less, equal, greater);
             Queue<Item> first = catenate(quickSort(less), equal);
-            first = catenate(first, greater);
+            first = catenate(first, quickSort(greater));
             return first;
 
         }
     }
 
     public static void main(String[] args) {
-        Queue<String> students = new Queue<String>();
-        students.enqueue("Alice");
-        students.enqueue("Vanessa");
-        students.enqueue("Ethan");
-        for (String s: students
-        ) {
-            System.out.println(s);
+        Queue<Integer> number = new Queue<Integer>();
+        number.enqueue(0);
+        number.enqueue(2);
+        number.enqueue(2);
+        number.enqueue(3);
+        number.enqueue(3);
+        number.enqueue(9);
+        number.enqueue(6);
+        number.enqueue(5);
+        number.enqueue(6);
+        number.enqueue(6);
+        for (Integer i: number) {
+            System.out.println(i);
         }
-        Queue<String> sorted = QuickSort.quickSort(students);
-        for (String s: sorted) {
-            System.out.println(s);
+        Queue<Integer> res = QuickSort.quickSort(number);
+        for (Integer i: res) {
+            System.out.println(i);
         }
+//        Queue<String> students = new Queue<String>();
+//        students.enqueue("Alice");
+//        students.enqueue("Vanessa");
+//        students.enqueue("Ethan");
+//        for (String s: students
+//        ) {
+//            System.out.println(s);
+//        }
+//        Queue<String> sorted = QuickSort.quickSort(students);
+//        for (String s: sorted) {
+//            System.out.println(s);
+//        }
 
 
     }
