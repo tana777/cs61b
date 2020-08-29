@@ -65,14 +65,22 @@ public class QuickSort {
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
-        if (items.size() <= 1) {
-            return items;
+
+        Queue<Item> copy = new Queue<>();
+        for (Item i: items
+             ) {
+            copy.enqueue(i);
+
+        }
+        if (copy.size() <= 1) {
+            return copy;
+
         } else {
-            Item pivot = getRandomItem(items);
+            Item pivot = getRandomItem(copy);
             Queue<Item> less = new Queue<>();
             Queue<Item> equal = new Queue<>();
             Queue<Item> greater = new Queue<>();
-            partition(items, pivot, less, equal, greater);
+            partition(copy, pivot, less, equal, greater);
             Queue<Item> first = catenate(quickSort(less), equal);
             first = catenate(first, quickSort(greater));
             return first;
